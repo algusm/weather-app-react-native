@@ -1,10 +1,10 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
-import { IconButton, TextInput } from "react-native-paper";
+import { TextInput } from "react-native-paper";
 import findForecastByCity from "../services/weather";
 
 
-export default function LocationSearch() {
+export default function WeeklyForecast() {
     const [cityName, setCityName] = React.useState('')
 
     const searchLocation = async () => {

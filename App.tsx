@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
 import { PaperProvider } from 'react-native-paper';
 
-import LocationSearch from './src/components/LocationSearch';
+import WeeklyForecast from './src/components/WeeklyForecast';
 
 function App(): React.JSX.Element {
   
@@ -11,7 +11,7 @@ function App(): React.JSX.Element {
       <SafeAreaView>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic">
-        <LocationSearch />
+        <WeeklyForecast />
       </ScrollView>
     </SafeAreaView>
     </PaperProvider>
