@@ -1,11 +1,12 @@
 import React from "react";
 import { SafeAreaView, View } from "react-native";
-import { TextInput, Text, Surface } from "react-native-paper";
+import { TextInput, Text, Surface, IconButton } from "react-native-paper";
 import findForecastByCity from "../services/weather";
 import DailyWeatherForecast from "../types/dailyWeatherForecast";
+import { WeeklyProps } from "../types/navigation";
 
 
-export default function WeeklyForecast() {
+export default function WeeklyForecast({navigation}: WeeklyProps) {
     const [cityName, setCityName] = React.useState('')
     const [weeklyForecast, setWeeklyForecast] = React.useState<DailyWeatherForecast[]>([])
 
@@ -26,6 +27,9 @@ export default function WeeklyForecast() {
                 <Text>
                     min. {dailyForecast.minimumTemperature} max {dailyForecast.maximumTemperature}
                 </Text>
+                <IconButton icon="magnify" onPress={() => {
+                    navigation.navigate('Daily', {dailyForecast : dailyForecast.hourlyForecastList})
+                }}/>
             </Surface>
             
           ))}

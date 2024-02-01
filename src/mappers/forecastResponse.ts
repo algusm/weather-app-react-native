@@ -21,6 +21,7 @@ function createForecastMapByDate(data : any) : Map<string, HourlyWeatherForecast
 
         forecastMap.get(localeDate).push({
             date : date,
+            temperature: Math.round(element.main.temp),
             minimumTemperature : Math.round(element.main.temp_min),
             maximumTemperature : Math.round(element.main.temp_max), 
             weatherType : element.weather[0].main,

@@ -2,6 +2,7 @@ type HourlyWeatherForecast = {
     date : Date,
     minimumTemperature : number,
     maximumTemperature : number,
+    temperature: number,
     pressure: string,
     humidity: string,
     wind: string,
