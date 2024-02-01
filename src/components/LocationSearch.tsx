@@ -9,13 +9,11 @@ export default function LocationSearch() {
 
     const searchLocation = async () => {
         const forecast = await findForecastByCity(cityName)
-        //console.log(forecast)
     } 
     
     return (
         <SafeAreaView>
-          <TextInput mode="outlined" label="Cidade" onChangeText={setCityName} value={cityName}/>
-          <IconButton icon="magnify" onPress={searchLocation}/>
+          <TextInput mode="outlined" label="Cidade" onChangeText={setCityName} value={cityName} right={<TextInput.Icon icon="magnify" onPress={searchLocation}/>}/>
         </SafeAreaView>
     );
 }
