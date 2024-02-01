@@ -1,5 +1,6 @@
 import React from "react";
-import { TextInput, Button, SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native";
+import { IconButton, TextInput } from "react-native-paper";
 import findForecastByCity from "../services/weather";
 
 
@@ -13,8 +14,8 @@ export default function LocationSearch() {
     
     return (
         <SafeAreaView>
-          <TextInput onChangeText={setCityName} value={cityName}/>
-          <Button title="Search" onPress={searchLocation}/>
+          <TextInput mode="outlined" label="Cidade" onChangeText={setCityName} value={cityName}/>
+          <IconButton icon="magnify" onPress={searchLocation}/>
         </SafeAreaView>
     );
 }
