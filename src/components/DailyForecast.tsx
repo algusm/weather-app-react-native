@@ -38,6 +38,16 @@ export default function DailyForecast({route, navigation} : Props) {
                             <Text style={{flex : 1, fontWeight : "bold"}}>Feels like</Text>
                             <Text style={{flex : 1, textAlign : "right"}}>{`${hourlyForecast.feelsLike}ºC`}</Text>
                         </View>
+
+                        <View style={{flexDirection : "row"}}>
+                            <Text style={{flex : 1, fontWeight : "bold"}}>Wind</Text>
+                            <Text style={{flex : 1, textAlign : "right"}}>{hourlyForecast.wind}</Text>
+                        </View>
+                        
+                        <View style={{flexDirection : "row"}}>
+                            <Text style={{flex : 1, fontWeight : "bold"}}>Cloudiness</Text>
+                            <Text style={{flex : 1, textAlign : "right"}}>{`${hourlyForecast.cloudiness}%`}</Text>
+                        </View>
                         
                         <View style={{flexDirection : "row"}}>
                             <Text style={{flex : 1, fontWeight : "bold"}}>Humidity</Text>
@@ -46,7 +56,7 @@ export default function DailyForecast({route, navigation} : Props) {
                         
                         <View style={{flexDirection : "row"}}>
                             <Text style={{flex : 1, fontWeight : "bold"}}>Pressure</Text>
-                            <Text style={{flex : 1, textAlign : "right"}}>{`${hourlyForecast.pressure} HPA`}</Text>
+                            <Text style={{flex : 1, textAlign : "right"}}>{`${hourlyForecast.pressure} hpa`}</Text>
                         </View>
                     </View>
                     

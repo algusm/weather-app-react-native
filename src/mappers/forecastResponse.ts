@@ -27,6 +27,8 @@ function createForecastMapByDate(data : any) : Map<string, HourlyWeatherForecast
             feelsLike : Math.round(element.main.feels_like),
             humidity : element.main.humidity,
             pressure : element.main.pressure, 
+            cloudiness : element.clouds.all,
+            wind: `${element.wind.speed}m/s, ${element.wind.deg}º`,
             weatherType : element.weather[0].main,
             weatherDescription : element.weather[0].description
         })
