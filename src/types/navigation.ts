@@ -1,13 +1,12 @@
-import HourlyWeatherForecast from "./hourlyWeatherForecast";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 type StackParamList = {
     Weekly: undefined;
-    Daily: { dailyForecast: HourlyWeatherForecast[] };
+    Daily: { index: number };
 };
 
-type Props = NativeStackScreenProps<StackParamList, 'Daily'>;
+type DailyProps = NativeStackScreenProps<StackParamList, 'Daily'>;
 
 type WeeklyProps = NativeStackScreenProps<StackParamList, 'Weekly'>;
 
-export type {Props, WeeklyProps, StackParamList}
+export type {DailyProps as Props, WeeklyProps, StackParamList}

@@ -1,5 +1,5 @@
 type HourlyWeatherForecast = {
-    date : Date,
+    date : number,
     minimumTemperature : number,
     maximumTemperature : number,
     temperature: number,

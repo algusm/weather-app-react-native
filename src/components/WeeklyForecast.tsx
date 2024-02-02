@@ -2,20 +2,23 @@ import React from "react";
 import { View, Pressable } from "react-native";
 import { TextInput, Text, Surface, ActivityIndicator } from "react-native-paper";
 import findForecastByCity from "../services/weather";
-import DailyWeatherForecast from "../types/dailyWeatherForecast";
 import { WeeklyProps } from "../types/navigation";
-import DailyForecast from "./DailyForecast";
+import { useSelector, useDispatch } from 'react-redux';
+import { update, selectWeeklyForecast } from "../slices/forecastSlice";
+import { getDayOfWeek } from "../utils/date";
 
 
 export default function WeeklyForecast({navigation}: WeeklyProps) {
     const [cityName, setCityName] = React.useState('')
     const [isLoading, setIsLoading] = React.useState(false)
-    const [weeklyForecast, setWeeklyForecast] = React.useState<DailyWeatherForecast[]>([])
+    const weeklyForecast = useSelector(selectWeeklyForecast)
+    const dispatch = useDispatch();
 
     const loadForecast = async () => {
         setIsLoading(true)
         const forecast = await findForecastByCity(cityName)
-        setWeeklyForecast(forecast)
+        //setWeeklyForecast(forecast)
+        dispatch(update(forecast))
         setIsLoading(false)
     } 
     
@@ -36,7 +39,7 @@ export default function WeeklyForecast({navigation}: WeeklyProps) {
                 {weeklyForecast.map((dailyForecast) =>(
                     
                     <Pressable onPress={() => {
-                        navigation.navigate('Daily', {dailyForecast : dailyForecast.hourlyForecastList})
+                        navigation.navigate('Daily', {index : weeklyForecast.indexOf(dailyForecast)})
                     }}>
                     <Surface elevation={2} style={{padding:10, margin: 5, flexDirection : "row", borderRadius : 10}}>
                         <Text variant="titleLarge" style={{flex :4}}>
@@ -62,8 +65,3 @@ export default function WeeklyForecast({navigation}: WeeklyProps) {
     );
 }
 
-function getDayOfWeek(date : Date) {
-    const days = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"]
-
-    return days[date.getDay()]
-}
