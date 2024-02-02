@@ -5,11 +5,12 @@ import Coordinate from "../types/coordinate";
 async function findCityCoordinateByName (name: string) : Promise<Coordinate> {
 
     const url = `${GEOCODING_API_URL}?q=${name}&appid=${API_ID}`
-    console.log(url)    
 
     const response = await axios.get(url)
+
+    if (response.data.length == 0)
+        throw new Error("LocationNotFound") 
     
-    console.log(response.data)
     return { latitude : response.data[0].lat, longitude : response.data[0].lon}  
 }
 

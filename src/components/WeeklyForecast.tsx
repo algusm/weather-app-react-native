@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { View, Pressable } from "react-native";
-import { TextInput, Text, Surface, ActivityIndicator } from "react-native-paper";
+import { TextInput, Text, Surface, ActivityIndicator, Portal, Snackbar } from "react-native-paper";
 import findForecastByCity from "../services/weather";
 import { WeeklyProps } from "../types/navigation";
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,15 +11,29 @@ import { getDayOfWeek } from "../utils/date";
 export default function WeeklyForecast({navigation}: WeeklyProps) {
     const [cityName, setCityName] = React.useState('')
     const [isLoading, setIsLoading] = React.useState(false)
+    const [message, setMessage] = React.useState('')
+    const [snackbarVisible, setSnackbarVisible] = React.useState(false) 
     const weeklyForecast = useSelector(selectWeeklyForecast)
     const dispatch = useDispatch();
 
+    const displayMessage = (message : string) => {
+        setMessage(message)
+        setSnackbarVisible(true)
+    }
+
     const loadForecast = async () => {
         setIsLoading(true)
-        const forecast = await findForecastByCity(cityName)
-        //setWeeklyForecast(forecast)
-        dispatch(update(forecast))
-        setIsLoading(false)
+        
+        try {
+            const forecast = await findForecastByCity(cityName)
+            dispatch(update(forecast))
+        } catch(error : any) {
+            displayMessage(error.message)
+            dispatch(update([]))
+        } finally {
+            setIsLoading(false)
+        }
+        
     } 
     
     return (
@@ -61,6 +75,13 @@ export default function WeeklyForecast({navigation}: WeeklyProps) {
                 ))}
             </View>
           }
+
+          <Portal>
+            <Snackbar visible={snackbarVisible} onDismiss={() => setSnackbarVisible(false)} action={{label: 'close'}}>
+                {message}
+            </Snackbar>
+          </Portal>
+
         </View>
     );
 }
