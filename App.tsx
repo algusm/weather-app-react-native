@@ -15,7 +15,7 @@ function App(): React.JSX.Element {
   return (
     <PaperProvider>
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown : false}}>
         <Stack.Screen name="Weekly" component={WeeklyForecast}/>
         <Stack.Screen name="Daily" component={DailyForecast}/>
       </Stack.Navigator>

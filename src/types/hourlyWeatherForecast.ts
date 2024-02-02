@@ -3,9 +3,9 @@ type HourlyWeatherForecast = {
     minimumTemperature : number,
     maximumTemperature : number,
     temperature: number,
+    feelsLike : number,
     pressure: string,
     humidity: string,
-    wind: string,
     weatherType: string
     weatherDescription: string
 }

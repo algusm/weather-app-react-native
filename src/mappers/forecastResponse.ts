@@ -23,7 +23,10 @@ function createForecastMapByDate(data : any) : Map<string, HourlyWeatherForecast
             date : date,
             temperature: Math.round(element.main.temp),
             minimumTemperature : Math.round(element.main.temp_min),
-            maximumTemperature : Math.round(element.main.temp_max), 
+            maximumTemperature : Math.round(element.main.temp_max),
+            feelsLike : Math.round(element.main.feels_like),
+            humidity : element.main.humidity,
+            pressure : element.main.pressure, 
             weatherType : element.weather[0].main,
             weatherDescription : element.weather[0].description
         })

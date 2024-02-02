@@ -1,6 +1,6 @@
 import { ScrollView, View } from "react-native";
 import { Props } from "../types/navigation";
-import { Divider, Text, Surface, Icon } from "react-native-paper";
+import { Divider, Text, Surface, Icon, IconButton } from "react-native-paper";
 
 export default function DailyForecast({route, navigation} : Props) {
 
@@ -27,21 +27,38 @@ export default function DailyForecast({route, navigation} : Props) {
 
     return (
         <ScrollView>
+            <View style={{flexDirection : "row"}}>
+                <IconButton size={20} icon="arrow-left" onPress={() => navigation.goBack()}/>
+                <Text style={{padding : 10}} variant="titleLarge">{getDayOfWeek(dailyForecast[0].date)}</Text>
+            </View>
+            
             {dailyForecast.map((hourlyForecast) =>(
             
             <Surface elevation={2} style={{padding:10, margin: 5, borderRadius : 10}}>
                 <View style={{flexDirection : "row"}}>
-                    <Text style={{flex : 9}}>lorem ipsum</Text>
+                    <Text style={{flex : 9, textAlignVertical : "center"}} variant="headlineSmall">{hourlyForecast.date.toLocaleTimeString()}</Text>
                     <Icon source={icons.get(hourlyForecast.weatherType)} size={40}/>
                 </View>
                 <View style={{marginBottom : 50, marginTop : 50}}>
-                    <Text style={{textAlign : "center"}} variant="displayLarge">{hourlyForecast.temperature}</Text>
+                    <Text style={{textAlign : "center"}} variant="displayLarge">{`${hourlyForecast.temperature}ºC`}</Text>
                     <Text style={{textAlign : "center"}} variant="bodySmall">{hourlyForecast.weatherDescription}</Text>
-                    <Text style={{textAlign : "center"}} variant="bodySmall">{hourlyForecast.date.toLocaleString()}</Text>
                 </View>
                 <Divider/>
-                <View>
-                <Text>lorem ipsum</Text>
+                <View style={{marginTop : 10}}>
+                    <View style={{flexDirection : "row"}}>
+                        <Text style={{flex : 1, fontWeight : "bold"}}>Feels like</Text>
+                        <Text style={{flex : 1, textAlign : "right"}}>{`${hourlyForecast.feelsLike}ºC`}</Text>
+                    </View>
+                    
+                    <View style={{flexDirection : "row"}}>
+                        <Text style={{flex : 1, fontWeight : "bold"}}>Humidity</Text>
+                        <Text style={{flex : 1, textAlign : "right"}}>{`${hourlyForecast.humidity}%`}</Text>
+                    </View>
+                    
+                    <View style={{flexDirection : "row"}}>
+                        <Text style={{flex : 1, fontWeight : "bold"}}>Pressure</Text>
+                        <Text style={{flex : 1, textAlign : "right"}}>{`${hourlyForecast.pressure} HPA`}</Text>
+                    </View>
                 </View>
                 
             </Surface>
@@ -50,4 +67,10 @@ export default function DailyForecast({route, navigation} : Props) {
         </ScrollView>
     );
 
+}
+
+function getDayOfWeek(date : Date) {
+    const days = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"]
+
+    return days[date.getDay()]
 }
