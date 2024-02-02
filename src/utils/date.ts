@@ -1,5 +1,5 @@
 function getDayOfWeek(milliseconds : number) {
-    const days = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"]
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
     return days[new Date(milliseconds).getDay()]
 }

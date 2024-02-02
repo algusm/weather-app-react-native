@@ -39,8 +39,8 @@ export default function WeeklyForecast({navigation}: WeeklyProps) {
     return (
         <View>
           <Text variant="titleMedium" style={{marginTop : 15, marginBottom : 5, paddingLeft : 10}}>Select a city</Text>
-          <TextInput mode="outlined" label="City" onChangeText={setCityName} value={cityName} right={<TextInput.Icon icon="magnify" onPress={loadForecast}/>} style={{marginBottom : 20}}/>
-          
+          <TextInput mode="outlined" label="City" onChangeText={setCityName} value={cityName} right={<TextInput.Icon icon="magnify" onPress={loadForecast} forceTextInputFocus={false}/>} style={{marginBottom : 20}}/>
+                    
           {isLoading && 
             <ActivityIndicator animating={isLoading}/>
           }        
