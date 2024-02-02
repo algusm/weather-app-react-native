@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { View, Pressable } from "react-native";
 import { TextInput, Text, Surface, ActivityIndicator } from "react-native-paper";
 import findForecastByCity from "../services/weather";
@@ -37,27 +37,27 @@ export default function WeeklyForecast({navigation}: WeeklyProps) {
                     <Text style={{paddingLeft : 10}}>Forecast for the week:</Text>
                 }
                 {weeklyForecast.map((dailyForecast) =>(
-                    
-                    <Pressable onPress={() => {
-                        navigation.navigate('Daily', {index : weeklyForecast.indexOf(dailyForecast)})
-                    }}>
-                    <Surface elevation={2} style={{padding:10, margin: 5, flexDirection : "row", borderRadius : 10}}>
-                        <Text variant="titleLarge" style={{flex :4}}>
-                            {getDayOfWeek(dailyForecast.date)}
-                        </Text>
-                        <View style={{flex :2, flexDirection : "row"}}>
-                            <Text style={{paddingTop : 7, paddingRight : 5}}>min.</Text>
-                            <Text variant="titleLarge">
-                                {`${dailyForecast.minimumTemperature}ºC`}
+                    <Fragment key={dailyForecast.date}>
+                        <Pressable onPress={() => {
+                            navigation.navigate('Daily', {index : weeklyForecast.indexOf(dailyForecast)})
+                        }}>
+                        <Surface elevation={2} style={{padding:10, margin: 5, flexDirection : "row", borderRadius : 10}}>
+                            <Text variant="titleLarge" style={{flex :4}}>
+                                {getDayOfWeek(dailyForecast.date)}
                             </Text>
-                        </View>
-                        <View style={{flex :2, flexDirection : "row"}}>
-                            <Text style={{paddingTop : 7, paddingRight : 5}}>max.</Text>
-                            <Text variant="titleLarge">{`${dailyForecast.maximumTemperature}ºC`}</Text>
-                        </View>
-                    </Surface>
-                    </Pressable>
-                    
+                            <View style={{flex :2, flexDirection : "row"}}>
+                                <Text style={{paddingTop : 7, paddingRight : 5}}>min.</Text>
+                                <Text variant="titleLarge">
+                                    {`${dailyForecast.minimumTemperature}ºC`}
+                                </Text>
+                            </View>
+                            <View style={{flex :2, flexDirection : "row"}}>
+                                <Text style={{paddingTop : 7, paddingRight : 5}}>max.</Text>
+                                <Text variant="titleLarge">{`${dailyForecast.maximumTemperature}ºC`}</Text>
+                            </View>
+                        </Surface>
+                        </Pressable>
+                    </Fragment>
                 ))}
             </View>
           }
